@@ -9,24 +9,23 @@ const fetchData = async (searchTerm) => {
     console.log(response.data);
 };
 
-const debounce = (func) => {
+const debounce = (func, delay = 1000) => {
     let timeoutId;
-return (...args) => { // might need to receive arguments, args need to be forwarded on to 'func'
+return (...args) => {
     if(timeoutId) {
         clearTimeout(timeoutId);
     }
 
     timeoutId = setTimeout(() => {
-        func.apply(null, args); // apply: call function as normally would, take arguments, pass in as separate arguments to the function
-        // apply will automatically keep track of arguments being passed through
-    }, 1000)
+        func.apply(null, args);
+    }, delay)
 
  };
 };
 
 const input = document.querySelector('input');
-const onInput = debounce(event => {
+const onInput = event => {
     fetchData(event.target.value);
-});
+};
 
-input.addEventListener('input', onInput);
+input.addEventListener('input', debounce(onInput, 500));
