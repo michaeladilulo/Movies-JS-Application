@@ -6,7 +6,7 @@ const fetchData = async (searchTerm) => {
         }
     });
 
-    console.log(response.data);
+    return response.data.Search; // returns Search portion of the response
 };
 
 const input = document.querySelector('input');
